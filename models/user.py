@@ -8,7 +8,6 @@ class User(db.Model):
     name = db.Column(db.String)
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
-    status = db.Column(db.String, nullable=False)
 
 class UserSchema(ma.Schema):
 
