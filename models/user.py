@@ -9,7 +9,10 @@ class User(db.Model):
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
 
+    profiles = db.relationship("Profile", back_populates='user', cascade='all, delete')
+
 class UserSchema(ma.Schema):
+    profiles = fields.List(fields.Nested('ProfileSchema', exclude=['user']))
 
     class Meta:
         fields = ('id', 'name', 'email', 'password')

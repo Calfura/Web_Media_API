@@ -20,3 +20,4 @@ def get_one_profile(profile_id):
         return profile_schema.dump(profile)
     else:
         return {"error": f"Profile with id {profile_id} does not exsist."}, 404
+    

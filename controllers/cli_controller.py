@@ -1,5 +1,6 @@
 from flask import Blueprint
 from init import db, bcrypt
+
 from models.user import User
 from models.profile import Profile
 from models.content import Content
@@ -41,13 +42,16 @@ def seed_tables():
 
     profiles = [
         Profile(
-            name = "Profile 1"
+            name = "Profile 1",
+            user_id = "1"
         ),
         Profile(
-            name = "Profile 2"
+            name = "Profile 2",
+            user_id = "2"
         ),
         Profile(
-            name = "Profile 3"
+            name = "Profile 3",
+            user_id = "3"
         )
     ]
 
@@ -85,23 +89,23 @@ def seed_tables():
     watchlists = [
         WatchList(
             title = "Watchlist 1",
-            content_id = "1",
-            profile_id = "1"
+            content_id = contents[0],
+            profile_id = profiles[0]
         ),
         WatchList(
             title = "Watchlist 2",
-            content_id = "3",
-            profile_id = "1"
+            content_id = contents[2],
+            profile_id = profiles[0]
         ),
         WatchList(
             title = "Watchlist 3",
-            content_id = "2",
-            profile_id = "2"
+            content_id = contents[1],
+            profile_id = profiles[1]
         ),
         WatchList(
             title = "Watchlist 4",
-            content_id = "4",
-            profile_id = "2"
+            content_id = contents[3],
+            profile_id = profiles[1]
         )
     ]
 
