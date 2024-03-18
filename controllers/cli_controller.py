@@ -86,22 +86,22 @@ def seed_tables():
         WatchList(
             title = "Watchlist 1",
             content_id = "1",
-            user_id = "1"
+            profile_id = "1"
         ),
         WatchList(
             title = "Watchlist 2",
             content_id = "3",
-            user_id = "1"
+            profile_id = "1"
         ),
         WatchList(
             title = "Watchlist 3",
             content_id = "2",
-            user_id = "2"
+            profile_id = "2"
         ),
         WatchList(
             title = "Watchlist 4",
             content_id = "4",
-            user_id = "2"
+            profile_id = "2"
         )
     ]
 

@@ -8,7 +8,7 @@ class Content(db.Model):
     name = db.Column(db.String)
     genre = db.Column(db.String)
     description = db.Column(db.Text)
-    duration = db.Column(db.Integer)
+    duration = db.Column(db.String)
 
 class ContentSchema(ma.Schema):
     
