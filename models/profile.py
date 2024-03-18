@@ -8,7 +8,9 @@ class Profile(db.Model):
     name = db.Column(db.String)
 
 class ProfileSchema(ma.Schema):
-    pass
+    
+    class Meta:
+        fields = ('id', 'name')
 
-profile_schema = ProfileSchema
+profile_schema = ProfileSchema()
 profiles_schema = ProfileSchema(many=True)

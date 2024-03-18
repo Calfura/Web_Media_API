@@ -10,8 +10,10 @@ class Content(db.Model):
     description = db.Column(db.Text)
     duration = db.Column(db.Integer)
 
-class ContentSchema():
-    pass
+class ContentSchema(ma.Schema):
+    
+    class Meta:
+        fields = ('id', 'name', 'genre', 'desciption', 'duration')
 
-content_schema = ContentSchema
+content_schema = ContentSchema()
 contetns_schema = ContentSchema(many=True)
