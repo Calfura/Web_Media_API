@@ -89,23 +89,23 @@ def seed_tables():
     watchlists = [
         WatchList(
             title = "Watchlist 1",
-            content_id = contents[0],
-            profile_id = profiles[0]
+            content = contents[0],
+            profiles = profiles[0]
         ),
         WatchList(
             title = "Watchlist 2",
-            content_id = contents[2],
-            profile_id = profiles[0]
+            content = contents[2],
+            profiles = profiles[0]
         ),
         WatchList(
             title = "Watchlist 3",
-            content_id = contents[1],
-            profile_id = profiles[1]
+            content = contents[1],
+            profiles = profiles[1]
         ),
         WatchList(
             title = "Watchlist 4",
-            content_id = contents[3],
-            profile_id = profiles[1]
+            content = contents[3],
+            profiles = profiles[1]
         )
     ]
 
