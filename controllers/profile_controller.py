@@ -12,12 +12,12 @@ def get_all_card():
     profiles = db.session.scalars(stmt)
     return profiles_schema.dump(profiles)
 
-@profiles_bp.route('/<int:profile_id>')
-def get_one_profile(profile_id):
-    stmt = db.select(Profile).filter_by(id=profile_id)
+@profiles_bp.route('/<int:profiles_id>')
+def get_one_profile(profiles_id):
+    stmt = db.select(Profile).filter_by(id=profiles_id)
     profile = db.session.scalar(stmt)
     if profile:
         return profile_schema.dump(profile)
     else:
-        return {"error": f"Profile with id {profile_id} does not exsist."}, 404
+        return {"error": f"Profile with id {profiles_id} does not exsist."}, 404
     

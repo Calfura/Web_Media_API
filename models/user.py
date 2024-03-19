@@ -12,7 +12,7 @@ class User(db.Model):
     profiles = db.relationship('Profile', back_populates='user', cascade='all, delete')
 
 class UserSchema(ma.Schema):
-    profiles = fields.List(fields.Nested('ProfileSchema', exclude=['user']))
+    profiles = fields.Nested('ProfileSchema', exclude=['user'])
 
     class Meta:
         fields = ('id', 'name', 'email', 'password', 'profiles')

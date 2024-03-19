@@ -14,7 +14,7 @@ class Profile(db.Model):
 
 class ProfileSchema(ma.Schema):
     user = fields.Nested('UserSchema', only = ['name', 'email'])
-    watchlists = fields.Nested(fields.Nested('WatchListSchema'))
+    watchlists = fields.Nested('WatchListSchema')
     
     class Meta:
         fields = ('id', 'name', 'user_id', 'user', 'watchlists')
