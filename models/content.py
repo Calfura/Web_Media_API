@@ -10,14 +10,15 @@ class Content(db.Model):
     description = db.Column(db.Text)
     duration = db.Column(db.String)
 
+    # Relation for Content to Watchlists
     watchlists = db.relationship('WatchList', back_populates='content')
 
 class ContentSchema(ma.Schema):
     
-    watchlists = fields.List(fields.Nested('WatchListSchema'))
+    watchlists = fields.Nested('WatchListSchema')
 
     class Meta:
-        fields = ('id', 'name', 'genre', 'desciption', 'duration', 'watchlists')
+        fields = ('id', 'name', 'genre', 'desciption', 'duration')
 
 content_schema = ContentSchema()
 contetns_schema = ContentSchema(many=True)
