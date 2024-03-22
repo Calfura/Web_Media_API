@@ -21,7 +21,7 @@ class ProfileSchema(ma.Schema):
     watchlists = fields.Nested('WatchListSchema', only=['title'])
     
     class Meta:
-        fields = ('id', 'name', 'user')
+        fields = ('id', 'name', 'user', 'profiles')
 
 profile_schema = ProfileSchema()
 profiles_schema = ProfileSchema(many=True)

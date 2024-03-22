@@ -7,11 +7,8 @@ class WatchList(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
 
-    # Content used in watchlist
-    content_id = db.Column(db.Integer, db.ForeignKey('content.id'), nullable=False)
-    
-    # Profile owner for watchlist
     profile_id = db.Column(db.Integer, db.ForeignKey('profiles.id'), nullable=False)
+    content_id = db.Column(db.Integer, db.ForeignKey('content.id'))
 
     profiles = db.relationship('Profile', back_populates='watchlists')
     content = db.relationship('Content', back_populates='watchlists')

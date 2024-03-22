@@ -4,8 +4,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from init import db
 from models.profile import Profile, profile_schema, profiles_schema
 
-
-profiles_bp = Blueprint('profiles', __name__, url_prefix='/profile')
+profiles_bp = Blueprint('profiles', __name__, url_prefix='/profiles')
 
 # Fetching all profiles
 @profiles_bp.route('/')
@@ -42,6 +41,21 @@ def profile_create():
     )
     # Add and commiting profile to database
     db.session.add(profile)
-    db.session.commit
+    db.session.commit()
     # Return newly made profile and code
-    return profile_schema.dump(profile),201
+    return profile_schema.dump(profile), 201
+
+@profiles_bp.route("/<int:profile_id>", methods=['DELETE'])
+@jwt_required()
+def profile_delete(profile_id):
+    stmt = db.select(Profile).where(Profile.id == profile_id)
+    profile = db.session.scalar(stmt)
+
+    if profile:
+
+        db.session.delete(profile)
+        db.session.commit()
+        
+        return {'message': f"Profile {profile.name} has been deleted."}, 201
+    else:
+        return {'error': f"Profile does not exsist."}, 404
