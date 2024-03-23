@@ -21,4 +21,4 @@ class ContentSchema(ma.Schema):
         fields = ('id', 'name', 'genre', 'desciption', 'duration')
 
 content_schema = ContentSchema()
-contetns_schema = ContentSchema(many=True)
+contents_schema = ContentSchema(many=True)

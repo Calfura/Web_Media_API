@@ -4,7 +4,6 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from init import db
 from models.watchlist import WatchList, watchlist_schema, watchlists_schema
 from models.profile import Profile
-from models.content import Content
 
 watchlists_bp = Blueprint('watchlists', __name__, url_prefix='/<int:profile_id>/watchlist')
 
@@ -45,7 +44,7 @@ def delete_watchlist(profile_id, watchlist_id):
 @jwt_required()
 def add_watchlist(profile_id, watchlist_id, content_id):
     body_data = request.get_json()
-    stmt = db.select(WatchList).filter_by(id=watchlist_id, profile_id=profile_id,content_id=content_id)
+    stmt = db.select(WatchList).filter_by(id=watchlist_id, profile_id=profile_id)
     watchlist = db.session.scalar(stmt)
     if watchlist:
         watchlist.content.id = body_data.get('content_id') or watchlist.content.id

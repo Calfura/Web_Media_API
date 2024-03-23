@@ -5,7 +5,7 @@ class WatchList(db.Model):
     __tablename__ = "watchlists"
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String)
+    title = db.Column(db.String, nullable=False)
 
     profile_id = db.Column(db.Integer, db.ForeignKey('profiles.id'), nullable=False)
     content_id = db.Column(db.Integer, db.ForeignKey('content.id'))

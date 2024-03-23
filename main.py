@@ -31,4 +31,7 @@ def create_app():
     from controllers.watchlist_controller import watchlists_bp
     app.register_blueprint(watchlists_bp)
 
+    from controllers.content_controller import content_bp
+    app.register_blueprint(content_bp)
+
     return app
