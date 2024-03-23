@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from init import db
-from models.watchlist import WatchList, watchlist_schema, watchlists_schema
+from models.watchlist import WatchList, watchlist_schema
 from models.profile import Profile
 
 watchlists_bp = Blueprint('watchlists', __name__, url_prefix='/<int:profile_id>/watchlist')
@@ -28,17 +28,19 @@ def create_watchlist(profile_id):
     else:
         return {"error": f"Profile with id {profile_id} does not exsist"}, 404
     
-@watchlists_bp.route('/<int:watchlist_id>', methods=['DELETE'])
+@watchlists_bp.route('/<lang_code>', methods=['DELETE'])
 @jwt_required()
-def delete_watchlist(profile_id, watchlist_id):
-    stmt = db.select(WatchList).filter_by(id=watchlist_id)
+def delete_watchlist(profile_id, lang_code):
+    stmt = db.select(WatchList).filter_by(title=lang_code)
     watchlist = db.session.scalar(stmt)
-    if watchlist and watchlist.profiles.id == profile_id:
-        db.session.delete(watchlist)
+    while watchlist and watchlist.profiles.id == profile_id:
+        # Queries for all related watchlists and deletes them
+        # Checks for owner
+        db.session.query(WatchList).filter(WatchList.title==lang_code, WatchList.profile_id==profile_id).delete()
         db.session.commit()
-        return {"message": f"Watchlist with id {watchlist_id} has been deleted"}, 201
+        return {"message": f"Watchlist with id {lang_code} has been deleted"}, 201
     else:
-        return {"error": f"Watchlist with id {watchlist_id} was not found in profile with id {profile_id}"}, 404
+        return {"error": f"Watchlist with id {lang_code} was not found in profile with id {profile_id}"}, 404
     
 @watchlists_bp.route('/<int:watchlist_id>', methods=['PUT', 'PATCH'])
 @jwt_required()
